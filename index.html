@@ -1,16 +1,35 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Typing game</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Typing game!</h1>
-  <p>Practice your typing skills with a quote from Sherlock Holmes. Click **start** to begin!</p>
-  <p id="quote"></p> 
+  <p>Practice your typing skills with a quote from Sherlock Holmes. Click *start* to begin!</p>
+  
+  <!-- Quote display -->
+  <p id="quote"></p>
+
+  <!-- Live status -->
   <p id="message"></p>
-    <input type="text" aria-label="current word" id="typed-value" />
-    <button type="button" id="start">Start</button>
-  </div>
+  <p id="timer">⏱️ Time: 0.00s</p>
+  <p id="wpm">⌨️ WPM: 0</p>
+  <p id="high-score">🏆 Best Time: --</p>
+
+  <!-- Typing input -->
+  <input type="text" aria-label="current word" id="typed-value" />
+
+  <!-- Controls -->
+  <button type="button" id="start">Start</button>
+  <button type="button" id="stop">🛑 Stop</button>
+  <button type="button" id="toggle-dark">🌓 Toggle Dark Mode</button>
+
+  <!-- Sound effects -->
+  <audio id="success-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_42b5e3f49b.mp3"></audio>
+  <audio id="error-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_cfae409be1.mp3"></audio>
+
   <script src="script.js"></script>
 </body>
 </html>

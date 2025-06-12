@@ -1,8 +1,58 @@
-.highlight {
-    background-color : yellow;
+body {
+  font-family:Poppins, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 0;
+  padding: 20px;
 }
 
-.error {
-    background-color : lightcoral;
-    border : red;
+.highlight {
+  background-color: yellow;
+  padding: 2px;
+}
+
+input.error {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+#timer,
+#wpm,
+#high-score {
+  font-family: monospace;
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+button {
+  padding: 8px 14px;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* 🌑 Dark mode styles */
+body.dark {
+  background-color: #121212;
+  color: #eeeeee;
+}
+
+body.dark input {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 1px solid #888;
+}
+
+body.dark input.error {
+  background-color: #442222;
+  border-color: red;
+}
+
+body.dark .highlight {
+  background-color: #ffeb3b;
+}
+
+input:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
 }
