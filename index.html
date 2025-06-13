@@ -6,20 +6,28 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Typing game!</h1>
-  <p>Practice your typing skills with a quote from Sherlock Holmes. Click *start* to begin!</p>
+  <h1>Want To Become a Pro at Typing?</h1>
+  <p>Curated specially for you, to make you excel in your professional life</p>
   
-  <!-- Quote display -->
-  <p id="quote"></p>
-
   <!-- Live status -->
   <p id="message"></p>
-  <p id="timer">⏱️ Time: 0.00s</p>
-  <p id="wpm">⌨️ WPM: 0</p>
-  <p id="high-score">🏆 Best Time: --</p>
+  <div class="grid">
+    <div id="timer">00.00s</div>
+    <div id="wpm">0</div>
+    <div id="high-score">--</div>
+    <p>Time</p>
+    <p>WPM</p>
+    <p>Best Time</p>
+  </div>
 
-  <!-- Typing input -->
-  <input type="text" aria-label="current word" id="typed-value" />
+  <!-- Text Box -->
+  <div id="textbox">
+      <!-- Displays Quote -->
+      <p id="quote"></p>
+    <!-- Typing input -->
+  <input type="text" aria-label="current word" id="typed-value" autofocus autocomplete="off" aria-hidden="true"/>
+  </div>
+  
 
   <!-- Controls -->
   <button type="button" id="start">Start</button>

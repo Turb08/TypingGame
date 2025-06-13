@@ -15,7 +15,8 @@ let words = [];
 let wordIndex = 0;
 let startTime;
 let timerInterval;
-let bestTime = localStorage.getItem("bestTime") || null;
+let bestTime = localStorage.getItem("bestTime");
+bestTime = bestTime ? parseFloat(bestTime) : null;
 
 const quoteElement = document.getElementById("quote");
 const messageElement = document.getElementById("message");
@@ -27,7 +28,21 @@ const successSound = document.getElementById("success-sound");
 const errorSound = document.getElementById("error-sound");
 const toggleDarkButton = document.getElementById("toggle-dark");
 
-if (bestTime) highScoreDisplay.innerText = `🏆 Best Time: ${bestTime}s`;
+if (bestTime) highScoreDisplay.innerText = `${bestTime}s`;
+
+function renderQuotePerCharacter(quote) {
+  quoteElement.innerHTML = "";
+  quote.split("").forEach((char, i) => {
+    const span = document.createElement("span");
+
+    // Replace spaces with non-breaking space for visibility
+    span.textContent = char === " " ? "\u00A0" : char;
+
+    span.classList.add("char");
+    if (i === 0) span.classList.add("active");
+    quoteElement.appendChild(span);
+  });
+}
 
 document.getElementById("start").addEventListener("click", () => {
   typedValueElement.disabled = false;
@@ -35,60 +50,88 @@ document.getElementById("start").addEventListener("click", () => {
   words = quote.split(" ");
   wordIndex = 0;
 
-  quoteElement.innerHTML = words
-    .map((word, index) => `<span id="word-${index}">${word}</span>`)
-    .join(" ");
+  renderQuotePerCharacter(quote);
   messageElement.innerText = "";
   typedValueElement.value = "";
   typedValueElement.focus();
   typedValueElement.className = "";
 
-  document.getElementById(`word-0`).classList.add("highlight");
-
   startTime = Date.now();
   clearInterval(timerInterval);
   timerInterval = setInterval(updateTimer, 100);
 
-  timerDisplay.innerText = `⏱️ Time: 0.00s`;
-  wpmDisplay.innerText = `⌨️ WPM: 0`;
+  timerDisplay.innerText = `00.00s`;
+  wpmDisplay.innerText = `0`;
+
+  // Reset state
+  charIndex = 0;
+  correctCount = 0;
+  incorrectCount = 0;
 });
 
-typedValueElement.addEventListener("input", () => {
-  const currentWord = words[wordIndex];
-  const typedValue = typedValueElement.value;
+let charIndex = 0;
+let correctCount = 0;
+let incorrectCount = 0;
 
-  const elapsedTime = (Date.now() - startTime) / 1000;
-  const wordsTyped = wordIndex + (typedValue.trim() === currentWord ? 1 : 0);
-  const wpm = Math.round((wordsTyped / elapsedTime) * 60);
-  wpmDisplay.innerText = `⌨️ WPM: ${wpm}`;
+typedValueElement.addEventListener("keydown", (e) => {
+  const spans = quoteElement.querySelectorAll(".char");
 
-  if (typedValue === currentWord && wordIndex === words.length - 1) {
-    const totalTime = elapsedTime.toFixed(2);
-    messageElement.innerText = `🎉 You finished in ${totalTime} seconds!`;
+  if (e.key.length !== 1 && e.key !== "Backspace") return;
+
+  if (e.key === "Backspace") {
+    if (charIndex === 0) return;
+    spans[charIndex].classList.remove("active");
+    charIndex--;
+    spans[charIndex].classList.remove("correct", "incorrect");
+    spans[charIndex].classList.add("active");
+    e.preventDefault();
+    return;
+  }
+
+  const expectedChar = spans[charIndex].textContent;
+  const userChar = e.key;
+
+  spans[charIndex].classList.remove("active");
+
+  if (userChar === expectedChar) {
+    spans[charIndex].classList.add("correct");
+    correctCount++;
+  } else {
+    spans[charIndex].classList.add("incorrect");
+    incorrectCount++;
+    errorSound.play();
+  }
+
+  charIndex++;
+  if (charIndex < spans.length) {
+    spans[charIndex].classList.add("active");
+  } else {
     clearInterval(timerInterval);
     successSound.play();
+
+    const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
+    const total = correctCount + incorrectCount;
+    const accuracy = ((correctCount / total) * 100).toFixed(1);
+
+    messageElement.innerText = `Accuracy: ${accuracy}%`;
 
     if (!bestTime || totalTime < bestTime) {
       bestTime = totalTime;
       localStorage.setItem("bestTime", totalTime);
-      highScoreDisplay.innerText = `🏆 Best Time: ${totalTime}s`;
+      highScoreDisplay.innerText = `${totalTime}s`;
     }
-  } else if (typedValue.endsWith(" ") && typedValue.trim() === currentWord) {
-    typedValueElement.value = "";
-    document.getElementById(`word-${wordIndex}`).classList.remove("highlight");
-    wordIndex++;
-    document.getElementById(`word-${wordIndex}`).classList.add("highlight");
-  } else if (currentWord.startsWith(typedValue)) {
-    typedValueElement.className = "";
-  } else {
-    typedValueElement.className = "error";
-    errorSound.play();
   }
+
+  const elapsedTime = (Date.now() - startTime) / 1000;
+  const wpm = Math.round((correctCount / 5 / elapsedTime) * 60);
+  wpmDisplay.innerText = `${wpm}`;
+
+  e.preventDefault();
 });
 
 function updateTimer() {
   const currentTime = ((Date.now() - startTime) / 1000).toFixed(2);
-  timerDisplay.innerText = `⏱️ Time: ${currentTime}s`;
+  timerDisplay.innerText = `${currentTime}s`;
 }
 
 // 🌙 Dark Mode Toggle
@@ -103,9 +146,9 @@ toggleDarkButton.addEventListener("click", () => {
 document.getElementById("stop").addEventListener("click", () => {
   clearInterval(timerInterval);
   typedValueElement.disabled = true;
-  messageElement.innerText = "⏹️ Typing stopped.";
+  //messageElement.innerText = "⏹️ Typing stopped.";
   quoteElement.innerHTML = "";
   typedValueElement.value = "";
-  wpmDisplay.innerText = "⌨️ WPM: 0";
-  timerDisplay.innerText = "⏱️ Time: 0.00s";
+  wpmDisplay.innerText = "0";
+  timerDisplay.innerText = "00.00s";
 });
