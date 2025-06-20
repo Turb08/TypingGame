@@ -81,8 +81,10 @@ P{
   padding: 10px;
   font-size: 1.2em;
   border-radius: 50px;
-  border: 2px solid #070000;
+  border: 2px solid #ffffff;
   margin: 0 auto;
+  background-color: #000000;
+  text-wrap-style:balance;
 }
 
 .char {

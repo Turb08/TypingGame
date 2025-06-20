@@ -146,7 +146,6 @@ toggleDarkButton.addEventListener("click", () => {
 document.getElementById("stop").addEventListener("click", () => {
   clearInterval(timerInterval);
   typedValueElement.disabled = true;
-  //messageElement.innerText = "⏹️ Typing stopped.";
   quoteElement.innerHTML = "";
   typedValueElement.value = "";
   wpmDisplay.innerText = "0";
