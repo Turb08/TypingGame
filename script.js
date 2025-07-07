@@ -15,6 +15,9 @@ let words = [];
 let wordIndex = 0;
 let startTime;
 let timerInterval;
+let charIndex = 0;
+let correctCount = 0;
+let incorrectCount = 0;
 let bestTime = localStorage.getItem("bestTime");
 bestTime = bestTime ? parseFloat(bestTime) : null;
 
@@ -30,12 +33,13 @@ const toggleDarkButton = document.getElementById("toggle-dark");
 
 if (bestTime) highScoreDisplay.innerText = `${bestTime}s`;
 
+// Splitting the quote into characters for per-character typing
 function renderQuotePerCharacter(quote) {
   quoteElement.innerHTML = "";
   quote.split("").forEach((char, i) => {
     const span = document.createElement("span");
 
-    // Replace spaces with non-breaking space for visibility
+    // Replacing spaces with non-breaking space for visibility
     span.textContent = char === " " ? "\u00A0" : char;
 
     span.classList.add("char");
@@ -69,15 +73,13 @@ document.getElementById("start").addEventListener("click", () => {
   incorrectCount = 0;
 });
 
-let charIndex = 0;
-let correctCount = 0;
-let incorrectCount = 0;
-
 typedValueElement.addEventListener("keydown", (e) => {
   const spans = quoteElement.querySelectorAll(".char");
 
+  //ignore keys that aren't a single character except Backspace
   if (e.key.length !== 1 && e.key !== "Backspace") return;
 
+  //Move back one character if Backspace is pressed
   if (e.key === "Backspace") {
     if (charIndex === 0) return;
     spans[charIndex].classList.remove("active");
@@ -93,28 +95,28 @@ typedValueElement.addEventListener("keydown", (e) => {
 
   spans[charIndex].classList.remove("active");
 
+  //If typed key is correct, mark correct else mark incorrect
   if (userChar === expectedChar) {
     spans[charIndex].classList.add("correct");
     correctCount++;
   } else {
     spans[charIndex].classList.add("incorrect");
     incorrectCount++;
-    errorSound.play();
   }
 
   charIndex++;
   if (charIndex < spans.length) {
     spans[charIndex].classList.add("active");
   } else {
+    // If all characters are typed, stop timer, compute and display stats
     clearInterval(timerInterval);
-    successSound.play();
-
     const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
     const total = correctCount + incorrectCount;
     const accuracy = ((correctCount / total) * 100).toFixed(1);
 
     messageElement.innerText = `Accuracy: ${accuracy}%`;
 
+    //Check for new best time and store if there is one
     if (!bestTime || totalTime < bestTime) {
       bestTime = totalTime;
       localStorage.setItem("bestTime", totalTime);
@@ -122,6 +124,7 @@ typedValueElement.addEventListener("keydown", (e) => {
     }
   }
 
+  // Update wpm on every keydown event
   const elapsedTime = (Date.now() - startTime) / 1000;
   const wpm = Math.round((correctCount / 5 / elapsedTime) * 60);
   wpmDisplay.innerText = `${wpm}`;
@@ -129,12 +132,13 @@ typedValueElement.addEventListener("keydown", (e) => {
   e.preventDefault();
 });
 
+// Update timer display every 100ms
 function updateTimer() {
   const currentTime = ((Date.now() - startTime) / 1000).toFixed(2);
   timerDisplay.innerText = `${currentTime}s`;
 }
 
-// 🌙 Dark Mode Toggle
+// Dark Mode Toggle
 toggleDarkButton.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   toggleDarkButton.innerText = document.body.classList.contains("dark")
@@ -142,7 +146,7 @@ toggleDarkButton.addEventListener("click", () => {
     : "🌓 Dark Mode";
 });
 
-// 🛑 Stop button functionality
+// Stop button functionality
 document.getElementById("stop").addEventListener("click", () => {
   clearInterval(timerInterval);
   typedValueElement.disabled = true;
