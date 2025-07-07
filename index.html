@@ -1,39 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Typing game</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <h1>Want To Become a Pro at Typing?</h1>
-  <p>Curated specially for you, to make you excel in your professional life</p>
-  
-  <!-- Live status -->
-  <p id="message"></p>
-  <div class="grid">
-    <div id="timer">00.00s</div>
-    <div id="wpm">0</div>
-    <div id="high-score">--</div>
-    <p>Time</p>
-    <p>WPM</p>
-    <p>Best Time</p>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Typing game</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-  <!-- Text Box -->
-  <div id="textbox">
+  <body>
+    <h1>Want To Become a Pro at Typing?</h1>
+    <p>
+      Curated specially for you, to make you excel in your professional life
+    </p>
+
+    <!-- Live status -->
+    <!-- <p id="message"></p> -->
+    <div class="grid">
+      <div id="timer">00.00s</div>
+      <div id="wpm">0</div>
+      <div id="high-score">--</div>
+      <div id="message">0%</div>
+      <p>Time</p>
+      <p>WPM</p>
+      <p>Best Time</p>
+      <p>Accuracy</p>
+    </div>
+
+    <!-- Text Box -->
+    <div id="textbox">
       <!-- Displays Quote -->
       <p id="quote"></p>
-    <!-- Typing input -->
-  <input type="text" aria-label="current word" id="typed-value" autofocus autocomplete="off" aria-hidden="true"/>
-  </div>
-  
+      <!-- Typing input -->
+      <input
+        type="text"
+        aria-label="current word"
+        id="typed-value"
+        autofocus
+        autocomplete="off"
+        aria-hidden="true"
+      />
+    </div>
 
-  <!-- Controls -->
-  <button type="button" id="start">Start</button>
-  <button type="button" id="stop">🛑 Stop</button>
-  <button type="button" id="toggle-dark">🌓 Toggle Dark Mode</button>
-
-  <script src="script.js"></script>
-</body>
+    <!-- Controls -->
+    <div class="button-container">
+      <button id="start">🟢 Start</button>
+      <button id="stop">🔴 Stop</button>
+      <button id="toggle-dark">🌓 Dark Mode</button>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>

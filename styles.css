@@ -1,5 +1,5 @@
 body {
-  font-family:Poppins, sans-serif;
+  font-family: Poppins, sans-serif;
   background-color: #f0f0f0;
   color: #333;
   margin: 0;
@@ -16,28 +16,42 @@ input.error {
   background-color: #ffe6e6;
 }
 
-.grid{
+.grid {
   font-family: Poppins, sans-serif;
   font-size: 1.5em;
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2);
-  margin: 0 100px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  margin: 40px 100px 0;
 }
 
 #timer,
 #wpm,
-#high-score {
+#high-score,
+#message {
   font-size: 1.2em;
   padding-top: 20px;
   text-align: center;
 }
 
-button {
-  padding: 8px 14px;
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#start,
+#stop,
+#toggle-dark {
+  padding: 15px 20px;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: 30px;
+  margin-left: 30px;
   cursor: pointer;
+  border-radius: 11px;
+  background-color: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
 }
 
 /* 🌑 Dark mode styles */
@@ -66,25 +80,25 @@ input:disabled {
   cursor: not-allowed;
 }
 
-h1{
+h1 {
   text-align: center;
 }
 
-P{
+P {
   text-align: center;
   margin: 0 auto 20px;
 }
 
 #textbox {
   width: 60%;
-  height: 150px;
-  padding: 10px;
+  height: 200px;
+  padding: 30px;
   font-size: 1.2em;
   border-radius: 50px;
   border: 2px solid #ffffff;
-  margin: 0 auto;
+  margin: 30px auto;
   background-color: #000000;
-  text-wrap-style:balance;
+  text-wrap-style: balance;
 }
 
 .char {
@@ -105,7 +119,7 @@ P{
 }
 
 input {
-  opacity: 0; 
-  position: absolute; 
+  opacity: 0;
+  position: absolute;
   pointer-events: none;
 }

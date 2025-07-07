@@ -9,6 +9,20 @@ const quoted = [
   "I never guess. It is a capital mistake to theorize before one has data.",
   "Mediocrity knows nothing higher than itself; but talent instantly recognizes genius.",
   "Education never ends, Watson. It is a series of lessons, with the greatest for the last.",
+  "Crime is common. Logic is rare. Therefore, it is upon the logic rather than upon the crime that you should dwell.",
+  "The little things are infinitely the most important.",
+  "You know my method. It is founded upon the observation of trifles.",
+  "I cannot live without brain-work. What else is there to live for?",
+  "It has long been an axiom of mine that the little things are infinitely the most important.",
+  "I am a brain, Watson. The rest of me is a mere appendix.",
+  "There is no branch of detective science which is so important and so much neglected as the art of tracing footsteps.",
+  "My name is Sherlock Holmes. It is my business to know what other people do not know.",
+  "You see, but you do not observe. The distinction is clear.",
+  "The temptation to form premature theories upon insufficient data is the bane of our profession.",
+  "A client is to me a mere unit, a factor in a problem.",
+  "Nothing clears up a case so much as stating it to another person.",
+  "I never make exceptions. An exception disproves the rule.",
+  "Violence does, in truth, recoil upon the violent, and the schemer falls into the pit which he digs for another.",
 ];
 
 let words = [];
@@ -30,6 +44,7 @@ const highScoreDisplay = document.getElementById("high-score");
 const successSound = document.getElementById("success-sound");
 const errorSound = document.getElementById("error-sound");
 const toggleDarkButton = document.getElementById("toggle-dark");
+const accuracydisplay = document.getElementById("message");
 
 if (bestTime) highScoreDisplay.innerText = `${bestTime}s`;
 
@@ -66,6 +81,7 @@ document.getElementById("start").addEventListener("click", () => {
 
   timerDisplay.innerText = `00.00s`;
   wpmDisplay.innerText = `0`;
+  accuracydisplay.innerText = `0%`;
 
   // Reset state
   charIndex = 0;
@@ -114,7 +130,7 @@ typedValueElement.addEventListener("keydown", (e) => {
     const total = correctCount + incorrectCount;
     const accuracy = ((correctCount / total) * 100).toFixed(1);
 
-    messageElement.innerText = `Accuracy: ${accuracy}%`;
+    messageElement.innerText = `${accuracy}%`;
 
     //Check for new best time and store if there is one
     if (!bestTime || totalTime < bestTime) {
