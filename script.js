@@ -53,10 +53,7 @@ function renderQuotePerCharacter(quote) {
   quoteElement.innerHTML = "";
   quote.split("").forEach((char, i) => {
     const span = document.createElement("span");
-
-    // Replacing spaces with non-breaking space for visibility
-    span.textContent = char === " " ? "\u00A0" : char;
-
+    span.textContent = char;
     span.classList.add("char");
     if (i === 0) span.classList.add("active");
     quoteElement.appendChild(span);
@@ -162,12 +159,13 @@ toggleDarkButton.addEventListener("click", () => {
     : "🌓 Dark Mode";
 });
 
-// Stop button functionality
-document.getElementById("stop").addEventListener("click", () => {
-  clearInterval(timerInterval);
-  typedValueElement.disabled = true;
-  quoteElement.innerHTML = "";
-  typedValueElement.value = "";
-  wpmDisplay.innerText = "0";
-  timerDisplay.innerText = "00.00s";
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    clearInterval(timerInterval);
+    typedValueElement.disabled = true;
+    quoteElement.innerHTML = "";
+    typedValueElement.value = "";
+    wpmDisplay.innerText = "0";
+    timerDisplay.innerText = "00.00s";
+  }
 });

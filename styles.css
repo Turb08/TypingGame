@@ -41,38 +41,40 @@ input.error {
 }
 
 #start,
-#stop,
 #toggle-dark {
+  font-family: Poppins, sans-serif;
   padding: 15px 20px;
   font-size: 16px;
   margin-top: 30px;
   margin-left: 30px;
   cursor: pointer;
-  border-radius: 11px;
+  border-radius: 50px;
   background-color: #000000;
   color: #ffffff;
-  border: 2px solid #ffffff;
+  border: 5px solid #d6b602f3;
+  border-style: inset;
+  font-weight: 700;
 }
 
 /* 🌑 Dark mode styles */
 body.dark {
   background-color: #121212;
   color: #eeeeee;
-}
 
-body.dark input {
-  background-color: #1e1e1e;
-  color: #fff;
-  border: 1px solid #888;
-}
+  #textbox {
+    background-color: #d9d9d9;
+    border: 2px solid #000000;
+  }
 
-body.dark input.error {
-  background-color: #442222;
-  border-color: red;
-}
+  #quote {
+    color: #000000;
+  }
 
-body.dark .highlight {
-  background-color: #ffeb3b;
+  #toggle-dark,
+  #start {
+    background-color: #ffffff;
+    color: #000000;
+  }
 }
 
 input:disabled {
@@ -84,7 +86,7 @@ h1 {
   text-align: center;
 }
 
-P {
+p {
   text-align: center;
   margin: 0 auto 20px;
 }
@@ -92,17 +94,16 @@ P {
 #textbox {
   width: 60%;
   height: 200px;
-  padding: 30px;
+  padding: 30px 25px;
   font-size: 1.2em;
   border-radius: 50px;
   border: 2px solid #ffffff;
   margin: 30px auto;
   background-color: #000000;
-  text-wrap-style: balance;
 }
 
 .char {
-  display: inline-block;
+  display: inline;
   transition: 0.1s;
 }
 
@@ -122,4 +123,11 @@ input {
   opacity: 0;
   position: absolute;
   pointer-events: none;
+}
+
+#quote {
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-align: left;
+  color: #ffffff;
 }
