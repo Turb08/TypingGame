@@ -2,8 +2,6 @@ body {
   font-family: Poppins, sans-serif;
   background-color: #f0f0f0;
   color: #333;
-  margin: 0;
-  padding: 20px;
 }
 
 .highlight {
@@ -20,16 +18,18 @@ input.error {
   font-family: Poppins, sans-serif;
   font-size: 1.5em;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  margin: 40px 100px 0;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin: auto;
+  max-width: 800px;
+  width: 90%;
 }
 
 #timer,
 #wpm,
 #high-score,
 #message {
-  font-size: 1.2em;
+  font-size: 1em;
   padding-top: 20px;
   text-align: center;
 }
@@ -40,13 +40,11 @@ input.error {
   align-items: center;
 }
 
-#start,
-#toggle-dark {
+#start {
   font-family: Poppins, sans-serif;
-  padding: 15px 20px;
+  padding: 10px 20px;
   font-size: 16px;
-  margin-top: 30px;
-  margin-left: 30px;
+  margin-left: 20px;
   cursor: pointer;
   border-radius: 50px;
   background-color: #000000;
@@ -54,6 +52,36 @@ input.error {
   border: 5px solid #d6b602f3;
   border-style: inset;
   font-weight: 700;
+}
+#toggle-dark {
+  font-family: Poppins, sans-serif;
+  padding: 20px 12px;
+  font-size: 16px;
+  margin-top: 30px;
+  cursor: pointer;
+  border-radius: 50px;
+  background-color: #000000;
+  color: #ffffff;
+  border: 5px solid #d6b602f3;
+  border-style: inset;
+  font-weight: 700;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#heading h1,
+#heading p {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  margin-top: -10px;
+  margin-left: -70px;
+}
+
+#container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 🌑 Dark mode styles */
@@ -82,23 +110,21 @@ input:disabled {
   cursor: not-allowed;
 }
 
-h1 {
-  text-align: center;
-}
-
-p {
+.label {
   text-align: center;
   margin: 0 auto 20px;
+  font-size: 0.8em;
 }
 
 #textbox {
-  width: 60%;
+  width: 90%;
+  max-width: 600px;
   height: 200px;
   padding: 30px 25px;
   font-size: 1.2em;
   border-radius: 50px;
   border: 2px solid #ffffff;
-  margin: 30px auto;
+  margin: auto;
   background-color: #000000;
 }
 

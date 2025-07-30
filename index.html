@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
     <title>Typing game</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
-    <button id="toggle-dark">🌓 Dark Mode</button>
-    <h1>Want To Become a Pro at Typing?</h1>
-    <p>
-      Curated specially for you, to make you excel in your professional life
-    </p>
+    <div id="container">
+      <button id="toggle-dark">🌓 Dark Mode</button>
+      <div id="heading">
+        <h1>Want To Become a Pro at Typing?</h1>
+        <p>
+          Curated specially for you, to make you excel in your professional life
+        </p>
+      </div>
+    </div>
 
     <!-- Live status -->
     <div class="grid">
@@ -19,10 +27,10 @@
       <div id="wpm">0</div>
       <div id="high-score">--</div>
       <div id="message">0%</div>
-      <p>Time</p>
-      <p>WPM</p>
-      <p>Best Time</p>
-      <p>Accuracy</p>
+      <p class="label">Time</p>
+      <p class="label">WPM</p>
+      <p class="label">Best Time</p>
+      <p class="label">Accuracy</p>
     </div>
 
     <!-- Text Box -->
